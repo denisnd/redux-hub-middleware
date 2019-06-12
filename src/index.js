@@ -9,7 +9,7 @@ const unwrapAction = action => {
     return rest;
 };
 
-export default function createHubMiddleware() {
+export default function createReduxHub() {
     const connectedStores = [];
 
     const connect = store => connectedStores.push(store);
@@ -29,7 +29,7 @@ export default function createHubMiddleware() {
 
         invariant(
             index !== -1,
-            "This store is not connected to hub, but hub middleware is used in it"
+            "This store is not connected to a hub, but hub middleware is used in it"
         );
 
         const result = next(action);
