@@ -18,12 +18,22 @@ const invariant = (condition, message) => {
   }
 };
 
+/**
+ * Returns new Hub instance
+ *
+ * @return {{connect: (function(object)), middleware: function}}
+ */
 export default function createReduxHub() {
   const connectedStores = [];
 
   const connect = store => connectedStores.push(store);
 
   const middleware = store => next => action => {
+    /* handling async and middlewares like redux-thunk */
+    if (typeof action !== 'object' || !action.type) {
+      return next(action);
+    }
+
     if (connectedStores.length < 2) {
       return next(action);
     }
