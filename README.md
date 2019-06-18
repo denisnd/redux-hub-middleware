@@ -22,6 +22,22 @@ import createReduxHub from 'redux-hub-middleware';
 
 const hub = createReduxHub();
 
+function reducer1(state = 'store1 initial', action) {
+  if (action.type === 'CHANGE') {
+    return action.value;
+  }
+  
+  return state;
+}
+
+function reducer2(state = 'store2 initial', action) {
+  if (action.type === 'CHANGE') {
+    return action.value;
+  }
+  
+  return state;
+}
+
 const store1 = createStore(reducer1, applyMiddleware(hub.middleware));
 
 const store2 = createStore(reducer2, applyMiddleware(hub.middleware));
@@ -29,7 +45,11 @@ const store2 = createStore(reducer2, applyMiddleware(hub.middleware));
 hub.connect(store1);
 hub.connect(store2);
 
-store1.dispatch({type: 'SOME_ACTION'});
+store1.dispatch({type: 'CHANGE', value: 'foo'});
+store2.getState(); // returns 'foo'
+
+store2.dispatch({type: 'CHANGE', value: 'bar'});
+store1.getState(); // returns 'bar'
 
 ```
 
