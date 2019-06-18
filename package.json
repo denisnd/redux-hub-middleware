@@ -1,6 +1,6 @@
 {
   "name": "redux-hub-middleware",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Redux middleware for dispatching actions on multiple stores at once",
   "repository": "denisnd/redux-hub-middleware",
   "main": "dist/index.js",
