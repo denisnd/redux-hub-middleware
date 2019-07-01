@@ -1,6 +1,9 @@
 # Redux Hub Middleware
 
-This Redux middleware's purpose is to allow actions dispatched on multiple stores at once
+This Redux middleware's purpose is to allow actions dispatched on multiple stores at once by transparently re-dispatching them.
+
+![Data flow within Flux application](./flow.png)
+
 It is likely to be used in large React/Redux-based projects having multiple sub-apps having own and *isolated* stores:
 
 ```jsx harmony
@@ -53,7 +56,7 @@ store1.getState(); // returns 'bar'
 
 ```
 
-A newly created hub could be passed to appliction components for later use:
+A newly created hub could be passed to application components for later use:
 
 ```jsx harmony
 import React from 'react';
@@ -70,6 +73,8 @@ React.render(
     root
 )
 ```
+
+**Important note**. The hub is working in bi-directional way. So any action dispatched at any connected store will be passed to others.
 
 ## API
 
